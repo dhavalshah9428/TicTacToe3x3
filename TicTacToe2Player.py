@@ -3,8 +3,8 @@ row2 = ['/','/','/']
 row3 = ['/','/','/']
 
 def xsturn():
-    row = input('X, which row?')
-    place = input('X, which place?') - 1
+    row = int(input('X, which row?'))
+    place = int(input('X, which place?')) - 1
     if row == 1:
         if row1[place] == '/':
             row1[place] = 'X'
@@ -25,8 +25,8 @@ def xsturn():
             xsturn()
 
 def osturn():
-    row = input('O, which row?')
-    place = input('O, which place?') - 1
+    row = int(input('O, which row?'))
+    place = int(input('O, which place?')) - 1
     if row == 1:
         if row1[place] == '/':
             row1[place] = 'O'
