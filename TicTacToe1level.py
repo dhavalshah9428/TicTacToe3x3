@@ -1,4 +1,6 @@
 import numpy as ny
+import random
+
 GameBoard = ny.array([['/','/','/'], ['/','/','/'], ['/','/','/']])
 
 def xsturn():
@@ -11,12 +13,11 @@ def xsturn():
         xsturn()
     
 def osturn():
-    row = int(input('0, which row?'))
-    place = int(input('0, which place?'))
+    row = random.randint(0,2)
+    place = random.randint(0,2)
     if GameBoard[row][place] == '/':
         GameBoard[row][place] = 'O'
     else:
-        print ('Move not possible!')
         osturn()
 
 def win():
@@ -50,12 +51,11 @@ def win():
 def game():
     GamePlay = 0
     while win() == 0:
-        print(GamePlay)
 
         xsturn()
         GamePlay += 1
-        print(ny.matrix(GameBoard))
         if win() == 1:
+            print(ny.matrix(GameBoard))
             print('X won the game!')
             break
         if GamePlay ==9 : 
@@ -64,9 +64,12 @@ def game():
 
         osturn()
         GamePlay += 1
-        print(ny.matrix(GameBoard))
+        print('\n Current board')
         if win() == 1:
+            print(ny.matrix(GameBoard))
             print('O won the game!')
-            breaks
+            break
+
+        print(ny.matrix(GameBoard))
 
 game()
