@@ -1,95 +1,72 @@
-row1 = ['/','/','/']
-row2 = ['/','/','/']
-row3 = ['/','/','/']
+import numpy as ny
+GameBoard = ny.array([['/','/','/'], ['/','/','/'], ['/','/','/']])
 
 def xsturn():
     row = int(input('X, which row?'))
-    place = int(input('X, which place?')) - 1
-    if row == 1:
-        if row1[place] == '/':
-            row1[place] = 'X'
-        else:
-            print ('Move not possible!')
-            xsturn()
-    elif row == 2:
-        if row2[place] == '/':
-            row2[place] = 'X'
-        else:
-            print ('Move not possible!')
-            xsturn()
-    elif row == 3:
-        if row3[place] == '/':
-            row3[place] = 'X'
-        else:
-            print ('Move not possible!')
-            xsturn()
-
+    place = int(input('X, which place?'))
+    if GameBoard[row][place] == '/':
+        GameBoard[row][place] = 'X'
+    else:
+        print ('Move not possible!')
+        xsturn()
+    
 def osturn():
-    row = int(input('O, which row?'))
-    place = int(input('O, which place?')) - 1
-    if row == 1:
-        if row1[place] == '/':
-            row1[place] = 'O'
-        else:
-            print ('Move not possible!')
-            osturn()
-    elif row == 2:
-        if row2[place] == '/':
-            row2[place] = 'O'
-        else:
-            print ('Move not possible!')
-            osturn()
-    elif row == 3:
-        if row3[place] == '/':
-            row3[place] = 'O'
-        else:
-            print ('Move not possible!')
-            osturn()
+    row = int(input('0, which row?'))
+    place = int(input('0, which place?'))
+    if GameBoard[row][place] == '/':
+        GameBoard[row][place] = 'O'
+    else:
+        print ('Move not possible!')
+        osturn()
 
 def win():
     value = 0
-    if row1[0] == row1[1] == row1[2]:
-        if row1[0] != '/':
+    if GameBoard[0][0] == GameBoard[0][1] == GameBoard[0][2]:
+        if GameBoard[0][0] != '/':
             value += 1
-    elif row2[0] == row2[1] == row2[2]:
-        if row2[0] != '/':
+    elif GameBoard[1][0] == GameBoard[1][1] == GameBoard[1][2]:
+        if GameBoard[1][0] != '/':
             value += 1
-    elif row3[0] == row3[1] == row3[2]:
-        if row3[0] != '/':
+    elif GameBoard[2][0] == GameBoard[2][1] == GameBoard[2][2]:
+        if GameBoard[2][0] != '/':
             value += 1
-    elif row1[0] == row2[0] == row3[0]:
-        if row1[0] != '/':
+    elif GameBoard[0][0] == GameBoard[1][0] == GameBoard[2][0]:
+        if GameBoard[0][0] != '/':
             value += 1
-    elif row1[1] == row2[1] == row3[1]:
-        if row1[1] != '/':
+    elif GameBoard[0][1] == GameBoard[1][1] == GameBoard[2][1]:
+        if GameBoard[0][1] != '/':
             value += 1
-    elif row1[2] == row2[2] == row3[2]:
-        if row1[2] != '/':
+    elif GameBoard[0][2] == GameBoard[1][2] == GameBoard[2][2]:
+        if GameBoard[0][2] != '/':
             value += 1
-    elif row1[0] == row2[1] == row3[2]:
-        if row1[0] != '/':
+    elif GameBoard[0][0] == GameBoard[1][1] == GameBoard[2][2]:
+        if GameBoard[0][0] != '/':
             value += 1
-    elif row1[2] == row2[1] == row3[0]:
-        if row1[2] != '/':
+    elif GameBoard[0][2] == GameBoard[1][1] == GameBoard[2][0]:
+        if GameBoard[0][2] != '/':
             value += 1
     return value
 
-def printingrows():
-    print (row1)
-    print (row2)
-    print (row3)
-
 def game():
+    GamePlay = 0
     while win() == 0:
+        print(GamePlay)
+
         xsturn()
-        printingrows()
+        GamePlay += 1
+        print(ny.matrix(GameBoard))
         if win() == 1:
-            print ('X won the game!')
+            print('X won the game!')
             break
-        else:
-            osturn()
-            printingrows()
-            if win() == 1:
-                print('O won the game!')
-                break
+        if GamePlay ==9 : 
+            print('Game draw !')
+            break
+
+        osturn()
+        GamePlay += 1
+        print(ny.matrix(GameBoard))
+        if win() == 1:
+            print('O won the game!')
+            breaks
+
 game()
